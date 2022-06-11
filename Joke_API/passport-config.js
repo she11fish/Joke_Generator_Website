@@ -1,30 +1,20 @@
+const LocalStartegy = require('passport-local');
+const axios = require('axios')
 
-const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require('bcyrpt')
+strategy = new LocalStartegy(async function verify(username, password, cb)
+{
 
-
-function initialize(passport, getUserByUsername) {
-    const authenticateUser = (username, password, done) => {
-        const user = getUserByUsername(username)
-        if (user == null)
-        {
-            return done(null, false, { message: 'Username does not exist'})
-        }
-        try{
-            if (await bcrypt.compare(password, user.PASSWORD))
-            {
-                return done(null, user) 
-            }else
-            {
-                return done(null, false, {message: 'Password incorrect'})
-            }
-        } catch (err)
-        {
-            return done(err)
-        }
+    const data = axios.get('http://localhost:3000/api')
+    .then(res => console.log(res.data))
+    .catch(err => { console.log(err)})
+    row = data.filter((row) => row.USERNAME === username)
+    if (!row) {
+        return cb(null, false, { message: 'Username is not valid' })
+    };
+    if (await bcrypt(password, row.PASSWORD))
+    {
+        return cb(null, row.USERNAME)
     }
-    passport.use(new LocalStrategy({ usernameField: 'USERNAME', passwordField: 'PASSWORD'}, authenticateUser))
-    passport.serliazer((user, done) => { })
-    passport.deserliazer((id, done) => { })
-}
-module.exports = initialize
+    return cb(null, false, {message: 'Password is not correct'})
+})
+
