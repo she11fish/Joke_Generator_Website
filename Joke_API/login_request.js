@@ -6,7 +6,7 @@ async function create_user()
     if (user_input != '' && password != '' && account_validator(user_input, password))
     {
         table = {'USERNAME': user_input, 'PASSWORD': password}
-        fetch('http://localhost:5500/login', {
+        fetch('http://localhost:3001/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -1,9 +1,9 @@
 const LocalStartegy = require('passport-local');
-const axios = require('axios')
+const axios = require('axios');
+const passport = require('passport');
 
 strategy = new LocalStartegy(async function verify(username, password, cb)
 {
-
     const data = axios.get('http://localhost:3000/api')
     .then(res => console.log(res.data))
     .catch(err => { console.log(err)})
@@ -17,4 +17,5 @@ strategy = new LocalStartegy(async function verify(username, password, cb)
     }
     return cb(null, false, {message: 'Password is not correct'})
 })
+
 

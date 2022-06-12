@@ -3,8 +3,6 @@ const sqlite3 = require('sqlite3')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const app = express()
-const passport = require('passport')
-const initializePassport = require('./passport-config')
 
 app.use(express.json())
 app.use(cors());
@@ -32,7 +30,6 @@ app.post('/create', async (req, res) => {
     const password = req.body.PASSWORD
     try {
         const hash_password = await bcrypt.hash(password, 10)
-        initializePassport(passport, username, password)
         console.log([username, hash_password])
         db = new sqlite3.Database('./user.db')
         db.run('INSERT INTO ACCOUNTS (USERNAME, PASSWORD) VALUES (?,?)', [username, hash_password])
