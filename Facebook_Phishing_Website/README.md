@@ -1,8 +1,8 @@
 # Introduction
 It is a facebook phishing website where the user is tricked into believing that the website they are using is the official facebook login page.
 It only works on a local computer. 
-I did not host the website itself with a Phishing URL to not promote any phishing websites.
-I don't want any script kiddies use my program for phishing.
+I did not host the phishing website online to not promote any phishing scams.
+The project is made for educational purposes only.
 
 # Setup
 1. Download facebook_phishing_website.py and retrieve_info.py
