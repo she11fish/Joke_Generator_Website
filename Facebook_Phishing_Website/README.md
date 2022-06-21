@@ -6,11 +6,11 @@ I don't want any script kiddies use my program for phishing.
 
 # Setup
 1. Download facebook_phishing_website.py and retrieve_info.py
-2. Create a data.txt file in the same directory as the facebook_phishing.py
-3. Make sure to have templates directory
+2. Create a data.txt file in the same directory as the facebook_phishing_website.py
+3. Make sure to have templates directory in the same directory as the facebook_phishing_website.py
 
 # How to use it
-1. Run the facebook_phishing.py
+1. Run the facebook_phishing_website.py
 2. Go to http://127.0.0.1:3000 on your browser
 3. Type in the credentials into the website
 4. Run retrieve_info.py
