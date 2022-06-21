@@ -16,7 +16,7 @@ The project is made for educational purposes only.
 2. Go to http://127.0.0.1:3000 on your browser
 3. Type in the credentials into the website
 4. Run retrieve_info.py
-5. Select the email you want see the password of
+5. Type in the email you want see the password of
 
 
 
