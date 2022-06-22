@@ -3,12 +3,9 @@ const sqlite3 = require('sqlite3')
 const cors = require('cors')
 const bcrypt = require('bcrypt')
 const app = express()
-const passport = require('passport')
+
 app.use(express.json())
 app.use(cors());
-const initializePassport = reqiure('./passport-config')
-initializePassport(passport, )
-
 app.get('/api', (req, res) => {
     
     db = new sqlite3.Database('./user.db')
@@ -41,6 +38,6 @@ app.post('/create', async (req, res) => {
     }catch {
         res.status(500).send()
     }
-    
 });
+
 app.listen(3000)
