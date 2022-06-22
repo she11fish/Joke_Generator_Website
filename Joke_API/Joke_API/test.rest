@@ -1,8 +1,0 @@
-POST http://localhost:5500/login
-Content-Type: application/json 
-
-{
-    "USERNAME": "sadfs",
-    "PASSWORD": "adfadsf"
-
-}
