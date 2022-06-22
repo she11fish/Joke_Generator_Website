@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+    <h1 id = "login">Log in</h1>
+    <h2>
+    <% if (messages.error) { %>
+        <%= messages.error %>
+    <% } %>
+    </h2>
+    <form action="/login/password" method="POST">
+        <div>
+            <label class="inputs" for="username">Username</label>
+            <input class="inputs" id="username" name="username" type="text" autocomplete="username" required />
+        </div>
+        <div>
+            <label for="current-password">Password</label>
+            <input class="inputs" id="current-password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <div>
+            <button id="button" type="submit">Log in</button>
+        </div>
+    </form>
+    </div>
+    <style>
+        h2 {
+            text-align: center;
+        }
+        #login{
+            font-size: 80px;
+            text-align: center;
+            left: 80px;
+            top: 12px;
+        }
+        #username{
+            position: relative;
+            right: 2px;
+        }
+        .inputs{
+            width: 200px;
+            height: 35px;
+        }
+        #button{
+            position: relative;
+            width: 200px;
+            left: 28px;
+            height: 35px;
+        }
+        div {
+            text-align: center;
+        }
+    </style>
+</body>
+</html>
