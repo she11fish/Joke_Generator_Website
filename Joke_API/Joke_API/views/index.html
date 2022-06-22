@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<head>
+    <body>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <div class="box">
+            <nav>
+                <a class="home" href="/views/index.html">HOME</a>
+                <a class="joke" href="/views/guess_joke.html">JOKE</a>
+                <a class="login" href="/views/login.html">LOG IN</a>
+                <a class="sign_up" href="/views/create_user.html">SIGN UP</a>
+            </nav>
+        </div>
+        <img src="../images/Trollface.PNG" id="troll_face" width="700" height="700">
+        <h2>The best comedic website ever</h2>
+        <div> 
+            <p id="paragraph">You can definetly trust us. There's nothing suspicious. Totally unSUSpicous!!!</p> 
+        </div>
+        <audio src="../mp3/Scheming Weasel Faster (Kevin Macleod) - Vanoss Gaming Background Music (HD) (320 kbps).mp3" autoplay>
+            <p>If you are reading this, it is because your browser does not support the audio element.</p>
+        </audio>
+        
+        <h3 id = 'response'></h3>
+        <h4 id = 'test'></h4>
+        <style>
+            body{
+                background-color: blue;
+            }
+            .home{
+                font-family: Roboto; 
+                font-size: 30px;
+                text-decoration:none;
+                color: inherit;
+                position: absolute;
+                left: 5%;
+                top: 13px;
+            }
+            .joke{
+                font-family: Roboto; 
+                font-size: 30px;
+                text-decoration:none;
+                color: inherit;
+                position: absolute;
+                left: 15%;
+                top: 13px;
+            }
+            .login{
+                font-family: Roboto; 
+                font-size: 30px;
+                text-decoration:none;
+                color: inherit;
+                position: absolute;
+                left: 80%;
+                top: 13px;
+            }
+            .sign_up{
+                font-family: Roboto; 
+                font-size: 30px;
+                text-decoration:none;
+                color: inherit;
+                position: absolute;
+                left: 90%;
+                top: 13px;
+            }
+            .box{
+                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+	            background-color: red;
+	            width: 100%;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                height: 70px;
+	            z-index: 99;
+            }
+            h2
+            {
+              position: relative;
+              top: 70px;
+              font-family: Cabin; 
+              font-size: 50px;
+              color: black;
+              text-align: center;
+            }
+            #input_bar{
+                width: 400px;
+            }
+            div{
+                text-align: center;
+            }
+            #paragraph{
+                text-align: center;
+                position: relative;    
+                top: 70px;
+                font-family: New Rocker;
+                font-size: 100px;
+            }
+            #troll_face{
+                position: absolute;
+                color: blue;
+                top: 500px;
+                left: 600px
+            }
+        </style>
+        <script src="../joke.js"> 
+        </script>
+    </body>
+</head>
