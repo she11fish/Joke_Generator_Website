@@ -13,12 +13,14 @@
         <div class="box">
             <nav>
                 <a class="home" href="/views/index.html">HOME</a>
-                <a class="joke" href="/views/guess_joke.html">JOKE</a>
-                <a class="login" href="/views/login.html">LOG IN</a>
+                <a class="joke" href="http://localhost:3001/login">JOKE</a>
+                <a class="login" href="http://localhost:3001/login">LOG IN</a>
                 <a class="sign_up" href="/views/create_user.html">SIGN UP</a>
             </nav>
         </div>
-        <img src="../images/Trollface.PNG" id="troll_face" width="700" height="700">
+        <div>
+            <img src="../images/Trollface.PNG" id="troll_face" width="700" height="700">
+        </div>
         <h2>The best comedic website ever</h2>
         <div> 
             <p id="paragraph">You can definetly trust us. There's nothing suspicious. Totally unSUSpicous!!!</p> 
@@ -91,11 +93,10 @@
             #input_bar{
                 width: 400px;
             }
-            div{
+            div {
                 text-align: center;
             }
             #paragraph{
-                text-align: center;
                 position: relative;    
                 top: 70px;
                 font-family: New Rocker;
@@ -105,7 +106,13 @@
                 position: absolute;
                 color: blue;
                 top: 500px;
-                left: 600px
+            }
+            div img {
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                margin:auto;
             }
         </style>
         <script src="../joke.js"> 

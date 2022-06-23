@@ -13,6 +13,7 @@
         <%= messages.error %>
     <% } %>
     </h2>
+    <div id="form_webpage">
     <form action="/login/password" method="POST">
         <div>
             <label class="inputs" for="username">Username</label>
@@ -27,11 +28,15 @@
         </div>
     </form>
     </div>
+    </div>
+    <div>
+    <p>Don't have an account?</p><a href="http://localhost:5500/views/create_user.html">Register</a>
+    </div>
     <style>
         h2 {
             text-align: center;
         }
-        #login{
+        #login {
             font-size: 80px;
             text-align: center;
             left: 80px;
@@ -41,18 +46,38 @@
             position: relative;
             right: 2px;
         }
-        .inputs{
+        #current-password {
+            position: relative;
+            right: 1px;
+
+        }
+        .inputs {
             width: 200px;
             height: 35px;
         }
-        #button{
+        #button {
             position: relative;
-            width: 200px;
-            left: 28px;
-            height: 35px;
+            width: 208px;
+            left: 32px;
+            height: 35px;      
+            top: 10px;
         }
         div {
             text-align: center;
+        }
+        #form_webpage {
+            position: relative;
+            right: 29px;
+        }
+        a {
+            color: inherit;
+            position: relative;
+            font-size: 30px;
+            left: 10px;
+        }
+        p {
+            display: inline-block;
+            font-size: 30px;
         }
     </style>
 </body>

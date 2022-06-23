@@ -54,19 +54,49 @@ passport.serializeUser((user, cb) => cb(null, user.ID));
   
 passport.deserializeUser((id, cb) => cb(null, row.ID));
 
-app.get('/test', (req, res) =>
+function check_user_authentication(req, res, next)
+{
+    if (req.isAuthenticated())
+    {
+        return next()
+    }
+    res.redirect('/login')
+}
+function check_user_not_authenticated(req, res, next)
+{
+    if (req.isAuthenticated())
+    {
+        return res.redirect('http://localhost:5500/views/guess_joke.html')
+    }
+    next()
+}
+app.delete('/logout', (req, res) =>
+{
+    req.logout(err => { 
+        if (err) { 
+            return next(err) 
+        } 
+        res.redirect('http://localhost:5500/views/index.html')
+    })
+})
+
+app.get('/test', check_user_authentication, (req, res) =>
 {
     res.send('Hello')
 })
-app.get('/login', (req, res) =>
+app.get('/login', check_user_not_authenticated, (req, res) =>
 {
     res.render('login.ejs')
 })
+app.get('/', check_user_authentication)
 app.post('/login/password', 
     passport.authenticate('local', 
     { 
-        successRedirect: '/test',
         failureRedirect: '/login',
         failureFlash: true }
-),)
+), (req, res) =>
+{
+    res.redirect('http://localhost:5500/views/guess_joke.html')
+})
+
 app.listen(3001);

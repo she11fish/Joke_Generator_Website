@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <title>Create a new account</title>
 </head>
 <body>
@@ -15,6 +18,9 @@
     </div>
     <div id="respond">
         <h2 id="response"></h2>
+    </div>
+    <div id="link">
+        <p>Already have an account?</p> <a href="http://localhost:3001/login">Login</a>
     </div>
     <style>
         #register{
@@ -44,6 +50,25 @@
         }
         div {
             text-align: center;
+        }
+        #respond { 
+            text-align: center; 
+            position: relative; 
+            bottom: 105px; 
+        }
+        a {
+            position: relative;
+            color: inherit;
+            top: 50px;
+            font-size: 30px;
+            /* font-family: 'Bebas Neue', cursive;
+             */
+        }
+        p {
+            display: inline-block;
+            position: relative;
+            top: 50px;
+            font-size: 30px;
         }
     </style>
     <script src="../user_create.js"></script>

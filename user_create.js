@@ -1,5 +1,3 @@
-const { response } = require("express")
-
 function create_user()
 {
     user_input = document.getElementById("user_input").value
@@ -13,8 +11,9 @@ function create_user()
                 'Accept': 'application/json',
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(table)
+            body: JSON.stringify(table),
         }).then((res) => { console.log(res) } ).catch((err) => { console.log(err) })
+        window.location.href = 'http://localhost:3001/login'
     }
     
 }
@@ -25,43 +24,29 @@ function account_validator(username, password)
     {
         user_response = document.getElementById('response')
         user_response.innerHTML = "Username must be of length 8"
-        style = document.createElement('style')
-        style.type = 'text/css'
-        style.innerHTML = '#respond { text-align: center; position: relative; bottom: 105px; }';
-        document.getElementsByTagName('head')[0].appendChild(style);
         return false
     } 
     if (password.length < 8)
     {
         password_response = document.getElementById('response')
         password_response.innerHTML = "Password must be of length 8"
-        style = document.createElement('style')
-        style.type = 'text/css'
-        style.innerHTML = '#respond { text-align: center; position: relative; bottom: 105px; }';
-        document.getElementsByTagName('head')[0].appendChild(style);
         return false
     } 
-    let i = 0
-    fetch("http://localhost:3000/api")
-        .then((data) => data.json()).then((users) =>
-        {
-            for (i in users)
-            {   
-                json = users[i]
-                if (user_input === json['USERNAME'])
-                {
-                    user_exists = document.getElementById('response')
-                    user_exists.innerHTML = "Username already taken"
-                    style = document.createElement('style')
-                    style.type = 'text/css'
-                    style.innerHTML = '#respond { text-align: center; position: relative; bottom: 105px; }';
-                    document.getElementsByTagName('head')[0].appendChild(style);
-                    return false
-                }
+    http_request = new XMLHttpRequest()
+    http_request.open('GET', 'http://localhost:3000/api', false)
+    http_request.send()
+    users = JSON.parse(http_request.responseText)
+    for (i in users)
+        {   
+            json = users[i]
+            if (user_input === json['USERNAME'])
+            {
+                user_exists = document.getElementById('response')
+                user_exists.innerHTML = "Username already taken"
+                return false
             }
-        })
-        .catch((err) => { console.log(err) })
-    
+        }
+
     return true
 }
 
