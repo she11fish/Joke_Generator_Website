@@ -1,4 +1,4 @@
-DELETE   http://localhost:3001/logout
+DELETE http://localhost:3001/logout
 Content-Type: application/json 
 
 {

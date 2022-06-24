@@ -63,7 +63,7 @@ function check(user_guess, answer){
 
 function logout()
 {
-    fetch('http://localhost:3001/logout', { method: 'DELETE' })
-        // .then(res => { window.location.href = 'http://localhost:5500/views/index.html'})
+    window.location = "http://localhost:3001/"
+    fetch('http://localhost:3001/logout', { method: 'DELETE'})
     
 }

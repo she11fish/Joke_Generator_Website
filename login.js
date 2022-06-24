@@ -14,16 +14,17 @@ app.use(flash())
 app.use(session(
     {
         secret: 'wow',
+        secure: true,
+        httpOnly: true,
         resave: false,
         saveUninitialized: false
     }
 ))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(passport.authenticate('session'));
 app.use(cors());
 app.use(express.json())
- 
+app.use(express.static("public")) 
 strategy = new LocalStartegy(function verify(username, password, cb)
 {
     db = new sqlite3.Database('./user.db')
@@ -50,12 +51,13 @@ strategy = new LocalStartegy(function verify(username, password, cb)
     
 })
 passport.use(strategy) 
-passport.serializeUser((user, cb) => cb(null, user.ID));
+passport.serializeUser((user, cb) => cb(null, user.USERNAME));
   
-passport.deserializeUser((id, cb) => cb(null, row.ID));
+passport.deserializeUser((id, cb) => cb(null, row));
 
 function check_user_authentication(req, res, next)
 {
+    console.log(req.isAuthenticated())
     if (req.isAuthenticated())
     {
         return next()
@@ -72,23 +74,28 @@ function check_user_not_authenticated(req, res, next)
 }
 app.delete('/logout', (req, res) =>
 {
-    req.logout(err => { 
-        if (err) { 
-            return next(err) 
-        } 
-        res.redirect('http://localhost:5500/views/index.html')
+    req.logout((err) =>
+    {
+        if (err)
+        {
+            return next(err)
+        }
+        // res.redirect("http://localhost:5500/views/index.html")
     })
 })
 
 app.get('/test', check_user_authentication, (req, res) =>
 {
-    res.send('Hello')
+    res.render('test.ejs', { name: req.user.USERNAME })
 })
 app.get('/login', check_user_not_authenticated, (req, res) =>
 {
     res.render('login.ejs')
 })
-app.get('/', check_user_authentication)
+app.get('/', (req, res) =>
+{
+    res.render('index.ejs')
+})
 app.post('/login/password', 
     passport.authenticate('local', 
     { 
