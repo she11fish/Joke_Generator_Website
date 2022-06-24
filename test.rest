@@ -1,8 +1,0 @@
-DELETE http://localhost:3001/logout
-Content-Type: application/json 
-
-{
-    "USERNAME": "sadfs",
-    "PASSWORD": "adfadsf"
-
-}
