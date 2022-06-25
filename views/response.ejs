@@ -18,7 +18,7 @@
         <div>
         </div> 
         <div>
-            <button type="submit" id="logout" ><a href="/joke">More Joke</a></button>
+            <button type="submit" id="joke" ><a href="/joke">More Jokes</a></button>
         </div>
         
         <style>
@@ -38,7 +38,7 @@
             body {
                 background-color: red;
             }
-            #logout {
+            #joke {
                 position: relative;
                 right: 20px;
                 top: 20px;
@@ -48,5 +48,13 @@
                 color: inherit;
             }
         </style>
+        <script>
+            function prevent_coming_back() 
+            {
+                window.history.forward()
+            }
+            setTimeout("prevent_coming_back()", 0)
+            window.onunload = () => null
+        </script>
     </body>
 </head>

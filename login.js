@@ -75,6 +75,10 @@ function check_user_not_authenticated(req, res, next)
     }
     next()
 }
+app.get('/delete', (req, res) =>
+{
+    res.send("Are you sure you want to delete your account?")
+})
 app.delete('/logout', (req, res) =>
 {
     req.logout((err) =>
@@ -97,7 +101,14 @@ app.get('/login', check_user_not_authenticated, (req, res) =>
 })
 app.get('/', (req, res) =>
 {
-    res.render('index.ejs')
+    if (req.isAuthenticated())
+    {
+        res.render('index.ejs', { delete_button: true })
+    }else
+    {
+        res.render('index.ejs', { delete_button: false })
+    }
+    
 })
 app.post('/login/password', 
     passport.authenticate('local', 
