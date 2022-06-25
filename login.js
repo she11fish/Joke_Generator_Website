@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt')
 const app = express()
 const sqlite3 = require('sqlite3')
 const flash = require('express-flash')
+const methodOverride = require('method-override')
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
@@ -25,6 +26,8 @@ app.use(passport.session())
 app.use(cors());
 app.use(express.json())
 app.use(express.static("public")) 
+app.use(methodOverride('_method'))
+
 strategy = new LocalStartegy(function verify(username, password, cb)
 {
     db = new sqlite3.Database('./user.db')
@@ -68,7 +71,7 @@ function check_user_not_authenticated(req, res, next)
 {
     if (req.isAuthenticated())
     {
-        return res.redirect('http://localhost:5500/views/guess_joke.html')
+        return res.redirect('/joke')
     }
     next()
 }
@@ -80,7 +83,7 @@ app.delete('/logout', (req, res) =>
         {
             return next(err)
         }
-        // res.redirect("http://localhost:5500/views/index.html")
+        res.redirect("/")
     })
 })
 
@@ -100,10 +103,38 @@ app.post('/login/password',
     passport.authenticate('local', 
     { 
         failureRedirect: '/login',
+        successRedirect: '/joke',
         failureFlash: true }
-), (req, res) =>
+))
+app.get('/joke', async(req, res) =>
 {
-    res.redirect('http://localhost:5500/views/guess_joke.html')
+    response = await axios.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
+    output = response.data 
+    if (output.setup)
+    {
+        result = [output.setup, output.delivery]
+    }
+    else{
+        result = output.joke
+    }
+    res.render('guess_joke.ejs', { output: result })
 })
+app.post('/guess_check', async(req, res) =>
+{
+    user_guess = req.body.user_guess
+    result = req.body.result
+    output = check(user_guess, result)
+    res.render('response.ejs')
+})
+
+function check(user_guess, answer){
+    if (user_guess.toLowerCase() == answer.toLowerCase())
+    {
+        return "You already knew the joke"
+    }else
+    {
+        return answer
+    }
+}
 
 app.listen(3001);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <body>
+        
+        <h2 id = 'response'></h2>
+        <% if (Array.isArray(output)) {%>
+            <h1><%=output[0]%></h1>
+            <div>
+                <form action="/guess_check" method="POST">
+                    <input type="text" id="user_input" name="user_guess">
+                    <input type="hidden" name="result" value="<%=output[1]%>">
+                    <button type="submit">Enter</button>
+                </form>
+            </div> 
+        <% } else { %>
+            <h1> <%= output %> </h1>
+        <% } %>
+        <div>
+        </div> 
+        <div>
+            <button type="submit" id="logout" ><a href="/joke">More Joke</a></button>
+        </div>
+        
+        <style>
+            h1 {
+              font-family: Cabin; 
+              font-size: 50px;
+              color: black;
+              text-align: center;
+            }
+            #input_bar {
+                width: 400px;
+            }
+            div {
+                text-align: center;
+                font-size: 50px;
+            }
+            body {
+                background-color: red;
+            }
+            #logout {
+                position: relative;
+                right: 20px;
+                top: 20px;
+            }
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+        </style>
+    </body>
+</head>
