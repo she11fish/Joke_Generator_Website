@@ -9,6 +9,7 @@ const app = express()
 const sqlite3 = require('sqlite3')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
+
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
