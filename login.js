@@ -75,10 +75,54 @@ function check_user_not_authenticated(req, res, next)
     }
     next()
 }
-app.get('/delete', (req, res) =>
-{
-    res.send("Are you sure you want to delete your account?")
+
+app.get('/api', (req, res) => {
+    
+    db = new sqlite3.Database('./user.db')
+    db.all("SELECT * FROM ACCOUNTS", function(err, data) {
+        if(err)
+        {
+            console.log(err)
+        }else{
+            if (data)
+            {
+                res.send(data)
+            }else
+            {
+                res.send("No users in the database")
+            }
+        }
+    });
+    db.close();
 })
+app.post('/create', async (req, res) => {
+    const username = req.body.USERNAME
+    const password = req.body.PASSWORD
+    try {
+        const hash_password = await bcrypt.hash(password, 10)
+        console.log([username, hash_password])
+        db = new sqlite3.Database('./user.db')
+        db.run('INSERT INTO ACCOUNTS (USERNAME, PASSWORD) VALUES (?,?)', [username, hash_password])
+        db.close()
+        res.status(201).send()
+    }catch {
+        res.status(500).send()
+    }
+});
+
+app.delete('/delete', (req, res) =>
+{
+    db = new sqlite3.Database('./user.db')
+    db.run('DELETE FROM ACCOUNTS WHERE ID=?', [req.user.ID], (err) =>
+    {
+        if (err)
+        {
+            console.log("Could not delete user from the database")
+        }
+    })
+    res.redirect('/')
+})
+
 app.delete('/logout', (req, res) =>
 {
     req.logout((err) =>
@@ -91,10 +135,6 @@ app.delete('/logout', (req, res) =>
     })
 })
 
-app.get('/test', check_user_authentication, (req, res) =>
-{
-    res.render('test.ejs', { name: req.user.USERNAME })
-})
 app.get('/login', check_user_not_authenticated, (req, res) =>
 {
     res.render('login.ejs')
@@ -117,6 +157,7 @@ app.post('/login/password',
         successRedirect: '/joke',
         failureFlash: true }
 ))
+
 app.get('/joke', async(req, res) =>
 {
     response = await axios.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
@@ -128,8 +169,9 @@ app.get('/joke', async(req, res) =>
     else{
         result = output.joke
     }
-    res.render('guess_joke.ejs', { output: result })
+    res.render('joke.ejs', { output: result })
 })
+
 app.post('/guess_check', async(req, res) =>
 {
     user_guess = req.body.user_guess

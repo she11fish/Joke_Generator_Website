@@ -5,7 +5,7 @@ function create_user()
     if (user_input != '' && password != '' && account_validator(user_input, password))
     {
         table = {'USERNAME': user_input, 'PASSWORD': password}
-        fetch('http://localhost:3000/create', {
+        fetch('http://localhost:3001/create', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -33,7 +33,7 @@ function account_validator(username, password)
         return false
     } 
     http_request = new XMLHttpRequest()
-    http_request.open('GET', 'http://localhost:3000/api', false)
+    http_request.open('GET', 'http://localhost:3001/api', false)
     http_request.send()
     users = JSON.parse(http_request.responseText)
     for (i in users)

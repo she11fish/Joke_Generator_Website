@@ -1,0 +1,45 @@
+h2 {
+    text-align: center;
+}
+#login {
+    font-size: 80px;
+    text-align: center;
+    left: 80px;
+    top: 12px;
+}
+#username{
+    position: relative;
+}
+#current-password {
+    position: relative;
+
+}
+.inputs {
+    width: 200px;
+    height: 35px;
+    left: 32px;
+}
+#button {
+    position: relative;
+    width: 208px;
+    left: 32px;
+    height: 35px;      
+    top: 10px;
+}
+div {
+    text-align: center;
+}
+#form_webpage {
+    position: relative;
+    right: 29px;
+}
+a {
+    color: inherit;
+    position: relative;
+    font-size: 30px;
+    left: 10px;
+}
+p {
+    display: inline-block;
+    font-size: 30px;
+}

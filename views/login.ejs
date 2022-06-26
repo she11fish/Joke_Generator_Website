@@ -16,12 +16,10 @@
     <div id="form_webpage">
     <form action="/login/password" method="POST">
         <div>
-            <label class="inputs" for="username">Username</label>
-            <input class="inputs" id="username" name="username" type="text" autocomplete="username" required />
+            <input class="inputs" id="username" name="username" type="text" placeholder="Username" autocomplete="username" required />
         </div>
         <div>
-            <label for="current-password">Password</label>
-            <input class="inputs" id="current-password" name="password" type="password" autocomplete="current-password" required />
+            <input class="inputs" id="current-password" name="password" type="password" placeholder="Password" autocomplete="current-password" required />
         </div>
         <div>
             <button id="button" type="submit">Log in</button>
@@ -32,53 +30,6 @@
     <div>
     <p>Don't have an account?</p><a href="http://localhost:5500/views/create_user.html">Register</a>
     </div>
-    <style>
-        h2 {
-            text-align: center;
-        }
-        #login {
-            font-size: 80px;
-            text-align: center;
-            left: 80px;
-            top: 12px;
-        }
-        #username{
-            position: relative;
-            right: 2px;
-        }
-        #current-password {
-            position: relative;
-            right: 1px;
-
-        }
-        .inputs {
-            width: 200px;
-            height: 35px;
-        }
-        #button {
-            position: relative;
-            width: 208px;
-            left: 32px;
-            height: 35px;      
-            top: 10px;
-        }
-        div {
-            text-align: center;
-        }
-        #form_webpage {
-            position: relative;
-            right: 29px;
-        }
-        a {
-            color: inherit;
-            position: relative;
-            font-size: 30px;
-            left: 10px;
-        }
-        p {
-            display: inline-block;
-            font-size: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/login.css" type="text/css" />
 </body>
 </html>

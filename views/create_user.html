@@ -12,9 +12,16 @@
 <body>
     <div id="output">
         <h1 id="register">Register</h1>
-        <input id="user_input" class="inputs" placeholder="Username" type="text">
-        <input class="inputs" id="button" type="button" value="Submit" onclick="create_user()">
-        <input id="password" class="inputs" placeholder="Password" type="password">
+        <div>
+            <input id="user_input" class="inputs" placeholder="Username" type="text">
+        </div>
+        <div>
+            <input id="password" class="inputs" placeholder="Password" type="password">
+        </div>
+        <div>
+            <input class="inputs" id="button" type="button" value="Submit" onclick="create_user()">
+        </div>
+        
     </div>
     <div id="respond">
         <h2 id="response"></h2>
@@ -22,55 +29,7 @@
     <div id="link">
         <p>Already have an account?</p> <a href="http://localhost:3001/login">Login</a>
     </div>
-    <style>
-        #register{
-            font-size: 80px;
-            text-align: center;
-            left: 80px;
-            top: 12px;
-        }
-        .inputs{
-            width: 200px;
-            height: 35px;
-        }
-        #user_input{
-            position: relative;
-            left: 136px;
-        }
-        #password{
-            position: relative;
-            top: 50px;
-            right: 150px;
-        }
-        #button{
-            position: relative;
-            top: 100px;
-            width: 70px;
-            height: 40px;
-        }
-        div {
-            text-align: center;
-        }
-        #respond { 
-            text-align: center; 
-            position: relative; 
-            bottom: 105px; 
-        }
-        a {
-            position: relative;
-            color: inherit;
-            top: 50px;
-            font-size: 30px;
-            /* font-family: 'Bebas Neue', cursive;
-             */
-        }
-        p {
-            display: inline-block;
-            position: relative;
-            top: 50px;
-            font-size: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="../public/css/create_user.css" type="text/css" />
     <script src="../user_create.js"></script>
 </body>
 </html>

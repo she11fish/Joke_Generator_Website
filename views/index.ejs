@@ -19,9 +19,10 @@
                 <a class="sign_up" href="http://localhost:5500/views/create_user.html">SIGN UP</a>
                 <% } %>
                 <% if (delete_button) { %>
-                    <form action="/delete" method="GET">
-                        <input type="hidden">
-                        <button class="delete_account">DELETE ACCOUNT</button>
+
+                    <div class="delete_account"> 
+                        <button type="submit" class="delete_button" onclick="response()">DELETE ACCOUNT</button>
+                    </div>
                     </form>
                     <form action="/logout?_method=DELETE" method="POST">
                         <input type="hidden">
@@ -36,118 +37,33 @@
         </div>
         <h2>The best comedic website ever</h2>
         <div> 
-            <p id="paragraph">You can definetly trust us. There's nothing suspicious. Totally unSUSpicous!!!</p> 
+            <p id="paragraph">You can definetly trust us. There's nothing suspicious. Totally unSUSpicious!!!</p> 
         </div>
         <audio src="/mp3/Scheming Weasel Faster (Kevin Macleod) - Vanoss Gaming Background Music (HD) (320 kbps).mp3" autoplay>
             <p>If you are reading this, it is because your browser does not support the audio element.</p>
         </audio>
-        
-        <style>
-            body{
-                background-color: blue;
-            }
-            .home{
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 5%;
-                top: 13px;
-            }
-            .joke{
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 15%;
-                top: 13px;
-            }
-            .login{
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 80%;
-                top: 13px;
-            }
-            .sign_up{
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 90%;
-                top: 13px;
-            }
-            .delete_account {
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 83%;
-                top: 13px;
-            }
-            .logout {
-                font-family: Roboto; 
-                font-size: 30px;
-                text-decoration:none;
-                color: inherit;
-                position: absolute;
-                left: 72%;
-                top: 13px;
-            }
-            .box{
-                box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-	            background-color: red;
-	            width: 100%;
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                height: 70px;
-	            z-index: 99;
-            }
-            h2
+        <div class="container">
+            <button id="close_button" type="submit" onclick="close_window()">&times;</button>
+            <div class="test">
+                <p id="test">Are you sure you want to delete your account?</p>
+                <form action="/delete?_method=DELETE" method="POST">
+                    <button id="yes" type="submit">YES</button>
+                </form>
+                <button id="no" type="submit" onclick="close_window()">NO</button>
+            </div>
+        </div>
+        <link rel="stylesheet" href="/css/index.css" type="text/css" />
+        <script>
+            function response() 
             {
-              position: relative;
-              top: 70px;
-              font-family: Cabin; 
-              font-size: 50px;
-              color: black;
-              text-align: center;
+                document.getElementsByClassName('container')[0].style.display = "block";
+                document.getElementsByTagName('html')[0].style.position = "fixed";
             }
-            #input_bar{
-                width: 400px;
+            function close_window()
+            {
+                document.getElementsByClassName('container')[0].style.display = "none";
+                document.getElementsByTagName('html')[0].style.position = "relative";
             }
-            div {
-                text-align: center;
-            }
-            #paragraph{
-                position: relative;    
-                top: 70px;
-                font-family: New Rocker;
-                font-size: 100px;
-            }
-            #troll_face{
-                position: absolute;
-                color: blue;
-                top: 500px;
-            }
-            div img {
-                position:absolute;
-                top:0;
-                left:0;
-                right:0;
-                margin:auto;
-            }
-            form button {
-                border: none;
-                background: transparent;
-                outline: none;
-            }
-        </style>
+        </script>
     </body>
 </head>

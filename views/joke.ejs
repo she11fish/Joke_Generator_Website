@@ -2,14 +2,13 @@
 <head>
     <body>
         
-        <h2 id = 'response'></h2>
         <% if (Array.isArray(output)) {%>
             <h1><%=output[0]%></h1>
             <div>
                 <form action="/guess_check" method="POST">
                     <input type="text" id="user_input" name="user_guess">
                     <input type="hidden" name="result" value="<%=output[1]%>">
-                    <button type="submit">Enter</button>
+                    <button type="submit" id="enter">Enter</button>
                 </form>
             </div> 
         <% } else { %>
@@ -23,38 +22,7 @@
             <button type="submit" id="joke" ><a href="/joke">More Jokes</a></button>
         </div>
         </form>
-        <style>
-            h1 {
-              font-family: Cabin; 
-              font-size: 50px;
-              color: black;
-              text-align: center;
-            }
-            #input_bar {
-                width: 400px;
-            }
-            div {
-                text-align: center;
-                font-size: 50px;
-            }
-            body {
-                background-color: red;
-            }
-            #home {
-                position: relative;
-                right: 20px;
-                top: 20px;
-            }
-            #joke {
-                position: relative;
-                left: 20px;
-                top: 20px;
-            }
-            a {
-                text-decoration: none;
-                color: inherit;
-            }
-        </style>
+        <link rel="stylesheet" href="/css/joke.css" type="text/css" />
         <script>
             function prevent_coming_back() 
             {

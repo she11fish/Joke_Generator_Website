@@ -1,0 +1,56 @@
+#register{
+    font-size: 80px;
+    text-align: center;
+    left: 80px;
+    top: 12px;
+}
+.inputs {
+    width: 200px;
+    height: 35px;
+    left: 3px;
+}
+#user_input {
+    position: relative;
+    /* top: 150px; */
+    /* left: 143px; */
+}
+#password {
+    position: relative;
+    /* top: 15px; */
+    /* bottom: 20px; */
+    /* right: 143px; */
+}
+#button {
+    position: relative;
+    width: 208px;
+    left: 3px;
+    height: 35px;      
+    top: 10px;
+}
+div {
+    text-align: center;
+}
+#respond { 
+    text-align: center; 
+    position: relative; 
+    bottom: 105px; 
+}
+#main_div {
+    position: relative;
+    right: 29px;
+}
+a {
+    position: relative;
+    color: inherit;
+    font-size: 30px;
+    left: 10px;
+    bottom: 20px;
+    /* font-family: 'Bebas Neue', cursive;
+     */
+}
+p {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    bottom: 20px;
+}

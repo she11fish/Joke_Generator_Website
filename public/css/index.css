@@ -1,0 +1,166 @@
+html, body {
+    margin: auto;
+    background-color: blue;
+}
+.home {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 5%;
+    top: 13px;
+}
+.joke {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 15%;
+    top: 13px;
+}
+.login {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 80%;
+    top: 13px;
+}
+.sign_up {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 90%;
+    top: 13px;
+}
+.delete_button {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 83%;
+    top: 13px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+.logout {
+    font-family: Roboto; 
+    font-size: 30px;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    left: 72%;
+    top: 13px;
+}
+.box{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    background-color: red;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 70px;
+    z-index: 99;
+}
+h2
+{
+  position: relative;
+  top: 70px;
+  font-family: Cabin; 
+  font-size: 50px;
+  color: black;
+  text-align: center;
+}
+#input_bar{
+    width: 400px;
+}
+div {
+    text-align: center;
+}
+#paragraph{ 
+    position: relative;    
+    top: 15px;
+    font-family: New Rocker;
+    font-size: 100px;
+}
+#troll_face {
+    position: absolute;
+    color: blue;
+    top: 500px;
+}
+div img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+form button {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+.container {
+    display: none;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 1500px;
+    height: 800px;
+    left: 210px;
+    bottom: 400px;
+    background-color: white;
+    position: fixed;
+    top: 130px;
+}
+.test {
+    bottom: 200px;
+    font-family: Roboto; 
+    font-size: 30px;
+}
+#test {
+    position: relative;
+    top: 200px;
+}
+#no {
+    position: relative;
+    outline: none;
+    border: none;
+    background-color: red;
+    top: 184px;
+    left: 400px;
+    border-radius: 25px;
+    width: 500px;
+    height: 100px;
+    font-size: 50px;
+    color: white;
+}
+#yes {
+    background-color: green;
+    position: relative;   
+    top: 285px;
+    width: 500px;
+    height: 100px;
+    border-radius: 25px;
+    right: 400px;
+    font-size: 50px;
+    color: white;
+}
+#close_button {
+    color: grey;
+    position: relative;
+    left: 720px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 50px;
+}
