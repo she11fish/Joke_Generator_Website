@@ -12,16 +12,17 @@
 <body>
     <div id="output">
         <h1 id="register">Register</h1>
-        <div>
-            <input id="user_input" class="inputs" placeholder="Username" type="text">
+        <div id="main_div">
+            <div>
+                <input id="user_input" class="inputs" placeholder="Username" type="text">
+            </div>
+            <div>
+                <input id="password" class="inputs" placeholder="Password" type="password">
+            </div>
+            <div>
+                <input class="inputs" id="button" type="button" value="Submit" onclick="create_user()">
+            </div>
         </div>
-        <div>
-            <input id="password" class="inputs" placeholder="Password" type="password">
-        </div>
-        <div>
-            <input class="inputs" id="button" type="button" value="Submit" onclick="create_user()">
-        </div>
-        
     </div>
     <div id="respond">
         <h2 id="response"></h2>

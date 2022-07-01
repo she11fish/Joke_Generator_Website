@@ -5,11 +5,16 @@ const express = require('express')
 const session = require('express-session')
 const cors = require('cors');
 const bcrypt = require('bcrypt')
-const app = express()
-const sqlite3 = require('sqlite3')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
+const mongoose = require('mongoose')
+const db = require('./schema')
+
+mongoose.connect('mongodb://localhost/userdb')
+
+const app = express()
 app.set('view engine', 'ejs')
+
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session(
@@ -28,97 +33,65 @@ app.use(express.json())
 app.use(express.static("public")) 
 app.use(methodOverride('_method'))
 
-strategy = new LocalStartegy(function verify(username, password, cb)
+strategy = new LocalStartegy(async function verify(username, password, cb)
 {
-    db = new sqlite3.Database('./user.db')
-    db.all("SELECT * FROM ACCOUNTS", async function(err, data) {
-        if (err) 
-        { 
-            return cb(err) 
-        }
-        if (!data)
-        {
-            return cb(null, false, { message: 'An error has occured while fetching the database' })
-        }
-        row = data.filter((row) => row.USERNAME === username)[0]
-        if (!row) {
-            return cb(null, false, { message: 'Username is not valid' })
-        }
-        if (await bcrypt.compare(password, row.PASSWORD))
-        {
-            return cb(null, row)
-        }
+    try {
+        const data = await db.find() 
+        check(data, username, password)
+    } catch {
+        return cb(null, false, { message: 'An error has occured while fetching the database' })
+    }
+
+    async function check(data, username, password) {
+        if (!data) return cb(null, false, { message: 'Could not find any data in the database' })
+        
+        row = data.find((row) => row.username === username)
+        
+        if (!row) return cb(null, false, { message: 'Username is not valid' })
+
+        if (await bcrypt.compare(password, row.password)) return cb(null, row)
+        
         return cb(null, false, { message: 'Password is not correct' })
-        })
-    db.close()
+    }
     
 })
+
 passport.use(strategy) 
-passport.serializeUser((user, cb) => cb(null, user.USERNAME));
-  
+passport.serializeUser((user, cb) => cb(null, user.username));
 passport.deserializeUser((id, cb) => cb(null, row));
 
-function check_user_authentication(req, res, next)
-{
-    console.log(req.isAuthenticated())
-    if (req.isAuthenticated())
-    {
-        return next()
-    }
-    res.redirect('/login')
-}
 function check_user_not_authenticated(req, res, next)
 {
-    if (req.isAuthenticated())
-    {
-        return res.redirect('/joke')
-    }
+    if (req.isAuthenticated()) return res.redirect('/joke')
     next()
 }
 
-app.get('/api', (req, res) => {
+app.get('/api', async (req, res) => {
+    try {
+        const data = await db.find()
+        data ? res.status(201).send(data) : res.send("No users in the database")
+    } catch {
+        res.status(500).send('An error occured while fetching the database')
+    }
     
-    db = new sqlite3.Database('./user.db')
-    db.all("SELECT * FROM ACCOUNTS", function(err, data) {
-        if(err)
-        {
-            console.log(err)
-        }else{
-            if (data)
-            {
-                res.send(data)
-            }else
-            {
-                res.send("No users in the database")
-            }
-        }
-    });
-    db.close();
 })
 app.post('/create', async (req, res) => {
-    const username = req.body.USERNAME
-    const password = req.body.PASSWORD
+    const username = req.body.username
+    const password = req.body.password
     try {
         const hash_password = await bcrypt.hash(password, 10)
-        console.log([username, hash_password])
-        db = new sqlite3.Database('./user.db')
-        db.run('INSERT INTO ACCOUNTS (USERNAME, PASSWORD) VALUES (?,?)', [username, hash_password])
-        db.close()
+        await db.create({ username: username, password: hash_password })
         res.status(201).send()
-    }catch {
+    } catch {
         res.status(500).send()
     }
 });
 
 app.delete('/delete', (req, res) =>
 {
-    db = new sqlite3.Database('./user.db')
-    db.run('DELETE FROM ACCOUNTS WHERE ID=?', [req.user.ID], (err) =>
+    db.findByIdAndDelete(req.user.id, (err) =>
     {
-        if (err)
-        {
-            console.log("Could not delete user from the database")
-        }
+        if (err) res.send(500).send("Could not delete user from the database")
     })
     res.redirect('/')
 })
@@ -127,10 +100,7 @@ app.delete('/logout', (req, res) =>
 {
     req.logout((err) =>
     {
-        if (err)
-        {
-            return next(err)
-        }
+        if (err) return next(err)
         res.redirect("/")
     })
 })
@@ -141,34 +111,24 @@ app.get('/login', check_user_not_authenticated, (req, res) =>
 })
 app.get('/', (req, res) =>
 {
-    if (req.isAuthenticated())
-    {
-        res.render('index.ejs', { delete_button: true })
-    }else
-    {
-        res.render('index.ejs', { delete_button: false })
-    }
-    
+    let delete_button = true
+    req.isAuthenticated() ? delete_button = true : delete_button = false
+    res.render('index.ejs', { delete_button: delete_button})
 })
 app.post('/login/password', 
     passport.authenticate('local', 
     { 
         failureRedirect: '/login',
         successRedirect: '/joke',
-        failureFlash: true }
+        failureFlash: true 
+    }
 ))
 
 app.get('/joke', async(req, res) =>
 {
     response = await axios.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
     output = response.data 
-    if (output.setup)
-    {
-        result = [output.setup, output.delivery]
-    }
-    else{
-        result = output.joke
-    }
+    output.setup ? result = [output.setup, output.delivery] : result = output.joke
     res.render('joke.ejs', { output: result })
 })
 
@@ -181,13 +141,8 @@ app.post('/guess_check', async(req, res) =>
 })
 
 function check(user_guess, answer){
-    if (user_guess.toLowerCase() == answer.toLowerCase())
-    {
-        return "You already knew the joke"
-    }else
-    {
-        return answer
-    }
+    if (user_guess.toLowerCase() == answer.toLowerCase()) return "You already knew the joke"
+    return answer
 }
 
 app.listen(3001);

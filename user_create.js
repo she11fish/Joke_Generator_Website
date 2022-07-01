@@ -4,7 +4,7 @@ function create_user()
     password = document.getElementById("password").value
     if (user_input != '' && password != '' && account_validator(user_input, password))
     {
-        table = {'USERNAME': user_input, 'PASSWORD': password}
+        table = {'username': user_input, 'password': password}
         fetch('http://localhost:3001/create', {
             method: 'POST',
             headers: {
@@ -39,7 +39,7 @@ function account_validator(username, password)
     for (i in users)
         {   
             json = users[i]
-            if (user_input === json['USERNAME'])
+            if (user_input === json['username'])
             {
                 user_exists = document.getElementById('response')
                 user_exists.innerHTML = "Username already taken"
