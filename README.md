@@ -1,5 +1,5 @@
 # Introduction
-A joke generator website where the user is challenged to guess the joke or look at the joke.
+A joke generator website where the user is challenged to guess or get the joke.
 
 # Setup
 Clone the repository locally.
