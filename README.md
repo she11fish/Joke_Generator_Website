@@ -14,10 +14,12 @@ npm install
 # How to use it
 1- Run ``` node login.js ```
 
-2- Go to http://localhost:3001
+2- Install and run MongoDB server 
 
-3- Create a username and password
+3- Go to http://localhost:3001
 
-4- Login
+4- Create a username and password
 
-5- Have fun!!!
+5- Login
+
+6- Have fun!!!
