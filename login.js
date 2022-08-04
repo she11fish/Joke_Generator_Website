@@ -128,7 +128,7 @@ app.get('/joke', async(req, res) =>
 {
     response = await axios.get("https://v2.jokeapi.dev/joke/Any?safe-mode")
     output = response.data 
-    output.setup ? result = [output.setup, output.delivery] : result = output.joke
+    result = output.setup ? [output.setup, output.delivery] : output.joke
     res.render('joke.ejs', { output: result })
 })
 
